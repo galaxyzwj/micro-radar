@@ -1,3 +1,5 @@
+#pragma once
+
 #include <WiFiManager.h>
 
 namespace WiFiManagerHelpers
