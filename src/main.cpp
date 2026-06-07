@@ -57,9 +57,9 @@ void setup()
 void loop()
 {
   unsigned long now = millis();
-  const double lat = 51.454863,
-    lon = -0.320663,
-    rad = 0.25;
+  double lat = std::stod(configServer.GetStoredString("latitude").c_str()),
+    lon = std::stod(configServer.GetStoredString("longitude").c_str()),
+    rad = std::stod(configServer.GetStoredString("radius").c_str());
 
   // fetch cycle
   if (now - lastFetch >= FETCH_INTERVAL) {
@@ -101,9 +101,9 @@ void loop()
 
   // draw cycle
   backbuffer.fillScreen(lgfx::color888(0, 0, 0));
-  backbuffer.drawCircle(SCREEN_SIZE_DIV_2, SCREEN_SIZE_DIV_2, SCREEN_SIZE_DIV_2 - 1, lgfx::color888(0, 255, 0));
+  backbuffer.drawCircle(SCREEN_SIZE_DIV_2, SCREEN_SIZE_DIV_2, SCREEN_SIZE_DIV_2 - 1, lgfx::color888(0, 200, 0));
   backbuffer.drawCircle(SCREEN_SIZE_DIV_2, SCREEN_SIZE_DIV_2, SCREEN_SIZE_DIV_2 / 2 - 1, lgfx::color888(0, 64, 0));
-  backbuffer.fillCircle(SCREEN_SIZE_DIV_2, SCREEN_SIZE_DIV_2, 3, lgfx::color888(0, 32, 0));
+  backbuffer.fillCircle(SCREEN_SIZE_DIV_2, SCREEN_SIZE_DIV_2, 2, lgfx::color888(0, 64, 0));
 
   for (auto& [icao, tracked] : trackedAircraft) {
     if (tracked.state.onGround) continue;
